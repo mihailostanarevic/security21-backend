@@ -6,6 +6,7 @@ import com.project.securitybackend.dto.response.LoginResponse;
 import com.project.securitybackend.entity.Admin;
 import com.project.securitybackend.repository.IAdminRepository;
 import com.project.securitybackend.service.definition.ILoginService;
+import com.project.securitybackend.util.exceptions.UserExceptions.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -22,15 +23,15 @@ public class LoginService implements ILoginService {
     }
 
     @Override
-    public LoginResponse login(LoginRequest request) throws Exception {
+    public LoginResponse login(LoginRequest request) {
         Admin admin = _adminRepository.findOneByEmail(request.getEmail());
 
         if (admin == null) {
-            throw new Exception(String.format("Bad credentials."));
+            throw new BadCredentialsException();
         }
 
         if (!_passwordEncoder.matches(request.getPassword(), admin.getPassword())) {
-            throw new Exception("Bad credentials.");
+            throw new BadCredentialsException();
         }
 
         LoginResponse loginResponse = new LoginResponse();

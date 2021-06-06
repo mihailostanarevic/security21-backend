@@ -5,5 +5,5 @@ import com.project.securitybackend.dto.response.LoginResponse;
 
 public interface ILoginService {
 
-    LoginResponse login(LoginRequest request) throws Exception;
+    LoginResponse login(LoginRequest request);
 }

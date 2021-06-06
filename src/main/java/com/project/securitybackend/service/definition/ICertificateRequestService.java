@@ -14,13 +14,13 @@ public interface ICertificateRequestService {
 
     CertificateRequestResponse createCertificateRequest(CertificateRequestRequest request) throws Exception;
 
-    CertificateRequestResponse getCertificateRequest(UUID id) throws Exception;
+    CertificateRequestResponse getCertificateRequest(UUID id);
 
-    List<CertificateRequestResponse> getAllCertificateRequests() throws Exception;
+    List<CertificateRequestResponse> getAllCertificateRequests();
 
     void approveCertificateRequest(CertificateRequestRequest request) throws Exception;
 
-    void denyCertificateRequest(UUID certificateId) throws Exception;
+    void denyCertificateRequest(UUID certificateId);
 
     IssuerEndDateResponse getIssuerCertificateEndDate(IssuerEndDateRequest request);
 

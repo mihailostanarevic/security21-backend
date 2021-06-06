@@ -19,7 +19,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public LoginResponse login(@RequestBody LoginRequest request) throws Exception {
+    public LoginResponse login(@RequestBody LoginRequest request) {
         return _loginService.login(request);
     }
 }
