@@ -1,8 +1,8 @@
 package com.project.securitybackend.controller;
 
 import com.project.securitybackend.dto.request.LoginRequest;
-import com.project.securitybackend.dto.response.LoginResponse;
-import com.project.securitybackend.service.definition.ILoginService;
+import com.project.securitybackend.dto.response.UserResponse;
+import com.project.securitybackend.service.definition.IAuthService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
-public class LoginController {
+public class AuthController {
 
-    private final ILoginService _loginService;
+    private final IAuthService _loginService;
 
-    public LoginController(ILoginService loginService) {
+    public AuthController(IAuthService loginService) {
         _loginService = loginService;
     }
 
     @PostMapping("/login")
-    public LoginResponse login(@RequestBody LoginRequest request) {
+    public UserResponse login(@RequestBody LoginRequest request) {
         return _loginService.login(request);
     }
 }

@@ -4,6 +4,8 @@ import com.project.securitybackend.util.exceptions.CertificateExceptions.Certifi
 import com.project.securitybackend.util.exceptions.CertificateExceptions.EmptyCertificateListException;
 import com.project.securitybackend.util.exceptions.UserExceptions.BadCredentialsException;
 import com.project.securitybackend.util.exceptions.UserExceptions.UserNotFoundException;
+import com.project.securitybackend.util.exceptions.UserExceptions.UserRegistrationDeniedException;
+import com.project.securitybackend.util.exceptions.UserExceptions.UserRegistrationNotApprovedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -46,6 +48,22 @@ public class GeneralExceptionHandler {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
         body.put("message", "Bad credentials");
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(UserRegistrationDeniedException.class)
+    public ResponseEntity<Object> handleUserRegistrationDeniedException(UserRegistrationDeniedException ex, WebRequest request) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("message", "Your registration has been denied.");
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(UserRegistrationNotApprovedException.class)
+    public ResponseEntity<Object> handleUserRegistrationNotApprovedException(UserRegistrationNotApprovedException ex, WebRequest request) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("message", "Your registration hasn't been approved yet.");
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 

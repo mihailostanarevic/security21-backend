@@ -8,6 +8,7 @@ import com.project.securitybackend.service.definition.IOCSPService;
 import com.project.securitybackend.util.enums.CertificateType;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.cert.X509Certificate;
@@ -28,6 +29,7 @@ public class CertificateController {
     }
 
     @GetMapping()
+    @PreAuthorize("hasAuthority('VIEW_CERTIFICATES')")
     public List<CertificateResponseDTO> getAllValidCertificates() throws Exception {
         List<X509Certificate> endUserCertificates = _certificateService.getAllActiveEndUserCertificates();
         List<X509Certificate> CACertificates = _certificateService.getAllActiveIntermediateCertificates();
@@ -46,6 +48,7 @@ public class CertificateController {
     }
 
     @GetMapping("/end-user")
+    @PreAuthorize("hasAuthority('VIEW_CERTIFICATES')")
     public List<CertificateResponseDTO> getAllEndUserCertificates() throws Exception {
         List<X509Certificate> certificateList = _certificateService.getAllActiveEndUserCertificates();
 
@@ -57,6 +60,7 @@ public class CertificateController {
     }
 
     @GetMapping("/ca")
+    @PreAuthorize("hasAuthority('VIEW_CERTIFICATES')")
     public List<CertificateResponseDTO> getAllValidCACertificates() throws Exception {
         List<X509Certificate> intermediateCertificates = _certificateService.getAllActiveIntermediateCertificates();
         List<X509Certificate> rootCertificates = _certificateService.getAllActiveRootCertificates();
@@ -73,28 +77,33 @@ public class CertificateController {
     }
 
     @GetMapping("/root")
+    @PreAuthorize("hasAuthority('VIEW_CERTIFICATES')")
     public List<CertificateResponseDTO> getAllRootCertificates(){
         List<X509Certificate> certificateList = _certificateService.getAllActiveRootCertificates();
         return _certificateService.listToDTO(CertificateType.ROOT, certificateList);
     }
 
     @PostMapping("/download")
+    @PreAuthorize("hasAuthority('DOWNLOAD_CERTIFICATE')")
     public ResponseEntity<Object> downloadCertificate(@RequestBody EmailRequestDTO request){
         return _certificateService.downloadCertificate(request);
     }
 
     @PostMapping("/file-name")
+    @PreAuthorize("hasAuthority('VIEW_CERTIFICATES')")
     public List<String> getFileName(@RequestBody EmailRequestDTO request){
         return _certificateService.getFileName(request.getEmail());
     }
   
     @PostMapping("/revoke")
+    @PreAuthorize("hasAuthority('REVOKE_CERTIFICATE')")
     public ResponseEntity<HttpStatus> revokeCertificate(@RequestBody EmailRequestDTO request) {
         _ocspService.revokeCertificate(request.getEmail());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/revoke")
+    @PreAuthorize("hasAuthority('VIEW_REVOKED')")
     public List<OCSPResponse> getRevokedCertificates() throws Exception {
         return _ocspService.getAll();
     }
