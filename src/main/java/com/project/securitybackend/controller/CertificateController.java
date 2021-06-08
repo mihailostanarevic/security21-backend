@@ -6,6 +6,7 @@ import com.project.securitybackend.dto.response.OCSPResponse;
 import com.project.securitybackend.service.definition.ICertificateService;
 import com.project.securitybackend.service.definition.IOCSPService;
 import com.project.securitybackend.util.enums.CertificateType;
+import com.project.securitybackend.util.exceptions.CertificateExceptions.NoValidCertificatesException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -30,7 +31,7 @@ public class CertificateController {
 
     @GetMapping()
     @PreAuthorize("hasAuthority('VIEW_CERTIFICATES')")
-    public List<CertificateResponseDTO> getAllValidCertificates() throws Exception {
+    public List<CertificateResponseDTO> getAllValidCertificates() {
         List<X509Certificate> endUserCertificates = _certificateService.getAllActiveEndUserCertificates();
         List<X509Certificate> CACertificates = _certificateService.getAllActiveIntermediateCertificates();
         List<X509Certificate> rootCertificates = _certificateService.getAllActiveRootCertificates();
@@ -41,7 +42,7 @@ public class CertificateController {
         retList.addAll(_certificateService.listToDTO(CertificateType.END_USER, endUserCertificates));
 
         if(retList.isEmpty()){
-            throw new Exception("There are no valid certificates.");
+            throw new NoValidCertificatesException("");
         }
 
         return retList;
@@ -49,11 +50,11 @@ public class CertificateController {
 
     @GetMapping("/end-user")
     @PreAuthorize("hasAuthority('VIEW_CERTIFICATES')")
-    public List<CertificateResponseDTO> getAllEndUserCertificates() throws Exception {
+    public List<CertificateResponseDTO> getAllEndUserCertificates() {
         List<X509Certificate> certificateList = _certificateService.getAllActiveEndUserCertificates();
 
         if(certificateList.isEmpty()){
-            throw new Exception("There are no valid end user certificates.");
+            throw new NoValidCertificatesException("end-user");
         }
 
         return _certificateService.listToDTO(CertificateType.END_USER, certificateList);
@@ -61,7 +62,7 @@ public class CertificateController {
 
     @GetMapping("/ca")
     @PreAuthorize("hasAuthority('VIEW_CERTIFICATES')")
-    public List<CertificateResponseDTO> getAllValidCACertificates() throws Exception {
+    public List<CertificateResponseDTO> getAllValidCACertificates() {
         List<X509Certificate> intermediateCertificates = _certificateService.getAllActiveIntermediateCertificates();
         List<X509Certificate> rootCertificates = _certificateService.getAllActiveRootCertificates();
 
@@ -70,7 +71,7 @@ public class CertificateController {
         retList.addAll(_certificateService.listToDTO(CertificateType.INTERMEDIATE,intermediateCertificates));
 
         if(retList.isEmpty()){
-            throw new Exception("There are no valid CA certificates.");
+            throw new NoValidCertificatesException("CA");
         }
 
         return retList;

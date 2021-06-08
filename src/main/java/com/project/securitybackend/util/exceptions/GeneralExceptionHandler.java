@@ -2,10 +2,9 @@ package com.project.securitybackend.util.exceptions;
 
 import com.project.securitybackend.util.exceptions.CertificateExceptions.CertificateEmailAlreadyExistException;
 import com.project.securitybackend.util.exceptions.CertificateExceptions.EmptyCertificateListException;
-import com.project.securitybackend.util.exceptions.UserExceptions.BadCredentialsException;
-import com.project.securitybackend.util.exceptions.UserExceptions.UserNotFoundException;
-import com.project.securitybackend.util.exceptions.UserExceptions.UserRegistrationDeniedException;
-import com.project.securitybackend.util.exceptions.UserExceptions.UserRegistrationNotApprovedException;
+import com.project.securitybackend.util.exceptions.CertificateExceptions.NoRevokedCertificatesException;
+import com.project.securitybackend.util.exceptions.CertificateExceptions.NoValidCertificatesException;
+import com.project.securitybackend.util.exceptions.UserExceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -23,7 +22,7 @@ public class GeneralExceptionHandler {
     public ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException ex, WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("message", "User not found");
+        body.put("message", ex.getMessage());
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
@@ -31,7 +30,7 @@ public class GeneralExceptionHandler {
     public ResponseEntity<Object> handleCertificateEmailExistsException(CertificateEmailAlreadyExistException ex, WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("message", "Certificate with this email already exist");
+        body.put("message", ex.getMessage());
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
@@ -39,7 +38,7 @@ public class GeneralExceptionHandler {
     public ResponseEntity<Object> handleEmptyCertificateListException(EmptyCertificateListException ex, WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("message", "There are no certificate requests.");
+        body.put("message", ex.getMessage());
         return new ResponseEntity<>(body, HttpStatus.NO_CONTENT);
     }
 
@@ -47,7 +46,7 @@ public class GeneralExceptionHandler {
     public ResponseEntity<Object> handleBadCredentialsException(BadCredentialsException ex, WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("message", "Bad credentials");
+        body.put("message", ex.getMessage());
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
@@ -55,7 +54,7 @@ public class GeneralExceptionHandler {
     public ResponseEntity<Object> handleUserRegistrationDeniedException(UserRegistrationDeniedException ex, WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("message", "Your registration has been denied.");
+        body.put("message", ex.getMessage());
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
@@ -63,7 +62,31 @@ public class GeneralExceptionHandler {
     public ResponseEntity<Object> handleUserRegistrationNotApprovedException(UserRegistrationNotApprovedException ex, WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("message", "Your registration hasn't been approved yet.");
+        body.put("message", ex.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NoValidCertificatesException.class)
+    public ResponseEntity<Object> handleNoValidCertificatesException(NoValidCertificatesException ex, WebRequest request) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("message", ex.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NoRevokedCertificatesException.class)
+    public ResponseEntity<Object> handleNoRevokedCertificatesException(NoRevokedCertificatesException ex, WebRequest request) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("message", ex.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(UserAlreadyExistException.class)
+    public ResponseEntity<Object> handleUserAlreadyExistException(UserAlreadyExistException ex, WebRequest request) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("message", ex.getMessage());
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 

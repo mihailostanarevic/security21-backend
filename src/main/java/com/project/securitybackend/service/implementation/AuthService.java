@@ -1,19 +1,21 @@
 package com.project.securitybackend.service.implementation;
 
 import com.project.securitybackend.dto.request.LoginRequest;
+import com.project.securitybackend.dto.request.RegistrationRequest;
+import com.project.securitybackend.dto.response.RegistrationResponse;
 import com.project.securitybackend.dto.response.UserResponse;
+import com.project.securitybackend.entity.Authority;
 import com.project.securitybackend.entity.SimpleUser;
 import com.project.securitybackend.entity.User;
 import com.project.securitybackend.entity.UserDetailsImpl;
+import com.project.securitybackend.repository.IAuthorityRepository;
+import com.project.securitybackend.repository.ISimpleUserRepository;
 import com.project.securitybackend.repository.IUserRepository;
 import com.project.securitybackend.security.TokenUtils;
 import com.project.securitybackend.service.definition.IAuthService;
 import com.project.securitybackend.util.enums.UserRole;
 import com.project.securitybackend.util.enums.UserStatus;
-import com.project.securitybackend.util.exceptions.UserExceptions.BadCredentialsException;
-import com.project.securitybackend.util.exceptions.UserExceptions.UserNotFoundException;
-import com.project.securitybackend.util.exceptions.UserExceptions.UserRegistrationDeniedException;
-import com.project.securitybackend.util.exceptions.UserExceptions.UserRegistrationNotApprovedException;
+import com.project.securitybackend.util.exceptions.UserExceptions.*;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,16 +25,25 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
+@SuppressWarnings("unused")
 @Service
 public class AuthService implements IAuthService {
 
     private final IUserRepository _userRepository;
+    private final ISimpleUserRepository _simpleUserRepository;
+    private final IAuthorityRepository _authorityRepository;
     private final PasswordEncoder _passwordEncoder;
     private final AuthenticationManager _authenticationManager;
     private final TokenUtils _tokenUtils;
 
-    public AuthService(IUserRepository userRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, TokenUtils tokenUtils) {
+    public AuthService(IUserRepository userRepository, ISimpleUserRepository simpleUserRepository, IAuthorityRepository authorityRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, TokenUtils tokenUtils) {
         _userRepository = userRepository;
+        _simpleUserRepository = simpleUserRepository;
+        _authorityRepository = authorityRepository;
         _passwordEncoder = passwordEncoder;
         _authenticationManager = authenticationManager;
         _tokenUtils = tokenUtils;
@@ -50,6 +61,41 @@ public class AuthService implements IAuthService {
         return createLoginUserResponse(authentication, user);
     }
 
+    @Override
+    public RegistrationResponse registration(RegistrationRequest request) {
+        User user = _userRepository.findOneByUsername(request.getUsername());
+        if(user != null) {
+            throw new UserAlreadyExistException(request.getUsername());
+        }
+
+        SimpleUser simpleUser = createSimpleUser(request);
+        return mapRegistrationToRegistrationResponse(simpleUser);
+    }
+
+    private RegistrationResponse mapRegistrationToRegistrationResponse(SimpleUser simpleUser) {
+        RegistrationResponse registrationResponse = new RegistrationResponse();
+        registrationResponse.setMessage("Registration request is successfully created");
+        return registrationResponse;
+    }
+
+    private SimpleUser createSimpleUser(RegistrationRequest request) {
+        SimpleUser simpleUser = new SimpleUser();
+        simpleUser.setUserRole(UserRole.SIMPLE_USER);
+        simpleUser.setUserStatus(UserStatus.PENDING);
+        simpleUser.setUsername(request.getUsername());
+        simpleUser.setFirstName(request.getFirstName());
+        simpleUser.setLastName(request.getLastName());
+        simpleUser.setPassword(_passwordEncoder.encode(request.getPassword()));
+        addAuthoritiesSimpleUser(simpleUser);
+
+        return _simpleUserRepository.save(simpleUser);
+    }
+
+    private void addAuthoritiesSimpleUser(SimpleUser user) {
+        List<Authority> authorities = new ArrayList<>();
+        authorities.add(_authorityRepository.findByName("ROLE_SIMPLE_USER"));
+        user.setAuthorities(new HashSet<>(authorities));
+    }
 
     private boolean isUserFound(User user, LoginRequest request) {
         return user != null && _passwordEncoder.matches(request.getPassword(), user.getPassword());
