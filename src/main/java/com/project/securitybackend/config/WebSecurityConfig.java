@@ -65,7 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint).and()
 
                 .authorizeRequests()
-                .antMatchers("/certificate-requests", "/certificate-requests/**", "/auth/**", "/ocsp/**").permitAll()
+                .antMatchers("/certificate-requests", "/certificate-requests/**", "/auth/**", "/ocsp/**", "/users/**").permitAll()
                 .anyRequest().authenticated().and()
 
                 .cors().and()
