@@ -26,6 +26,7 @@ public class SimpleCorsFilter implements Filter {
         response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me");
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         response.setHeader("Pragma", "no-cache");
+        response.setHeader("X-XSS-Protection", "1;mode=block");
 
         chain.doFilter(req, res);
     }
