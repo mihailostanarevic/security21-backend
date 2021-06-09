@@ -1,6 +1,8 @@
 package com.project.securitybackend.service.implementation;
 
+import com.project.securitybackend.dto.request.EmailRequestDTO;
 import com.project.securitybackend.dto.request.LoginRequest;
+import com.project.securitybackend.dto.request.RecoverPasswordRequest;
 import com.project.securitybackend.dto.request.RegistrationRequest;
 import com.project.securitybackend.dto.response.RegistrationResponse;
 import com.project.securitybackend.dto.response.UserResponse;
@@ -13,9 +15,12 @@ import com.project.securitybackend.repository.ISimpleUserRepository;
 import com.project.securitybackend.repository.IUserRepository;
 import com.project.securitybackend.security.TokenUtils;
 import com.project.securitybackend.service.definition.IAuthService;
+import com.project.securitybackend.service.definition.IEmailService;
 import com.project.securitybackend.util.enums.UserRole;
 import com.project.securitybackend.util.enums.UserStatus;
 import com.project.securitybackend.util.exceptions.UserExceptions.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,6 +30,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -39,14 +45,16 @@ public class AuthService implements IAuthService {
     private final PasswordEncoder _passwordEncoder;
     private final AuthenticationManager _authenticationManager;
     private final TokenUtils _tokenUtils;
+    private final IEmailService _emailService;
 
-    public AuthService(IUserRepository userRepository, ISimpleUserRepository simpleUserRepository, IAuthorityRepository authorityRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, TokenUtils tokenUtils) {
+    public AuthService(IUserRepository userRepository, ISimpleUserRepository simpleUserRepository, IAuthorityRepository authorityRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, TokenUtils tokenUtils, IEmailService emailService) {
         _userRepository = userRepository;
         _simpleUserRepository = simpleUserRepository;
         _authorityRepository = authorityRepository;
         _passwordEncoder = passwordEncoder;
         _authenticationManager = authenticationManager;
         _tokenUtils = tokenUtils;
+        _emailService = emailService;
     }
 
     @Override
@@ -70,6 +78,34 @@ public class AuthService implements IAuthService {
 
         SimpleUser simpleUser = createSimpleUser(request);
         return mapRegistrationToRegistrationResponse(simpleUser);
+    }
+
+    @Override
+    public ResponseEntity<?> recoverPassword(RecoverPasswordRequest request) {
+        String username = _tokenUtils.getUsernameFromToken(request.getUser());
+        User user = _userRepository.findOneByUsername(username);
+        if(user == null){
+            return new ResponseEntity<>("An error has occurred", HttpStatus.BAD_REQUEST);
+        }
+
+        if(!request.getPassword().equals(request.getRepeatedPassword())){
+            return new ResponseEntity<>("Your password and repeated password don't match, try again.", HttpStatus.BAD_REQUEST);
+        }
+
+        user.setPassword(_passwordEncoder.encode(request.getPassword()));
+        _userRepository.save(user);
+
+        return new ResponseEntity<>("Password changed successfully", HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<?> forgotPassword(EmailRequestDTO request) throws MessagingException {
+        User user = _userRepository.findOneByUsername(request.getEmail());
+        if(user == null){
+            return new ResponseEntity<>("User not found with the email provided.", HttpStatus.NOT_FOUND);
+        }
+
+        return _emailService.sendPasswordRecoveryEmail("Password recovery link", request.getEmail(), null, user.getFirstName());
     }
 
     private RegistrationResponse mapRegistrationToRegistrationResponse(SimpleUser simpleUser) {
