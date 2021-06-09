@@ -21,7 +21,7 @@ public class SimpleCorsFilter implements Filter {
 
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
         response.setHeader("Access-Control-Allow-Credentials", "true");
-        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT");
+        response.setHeader("Access-Control-Allow-Methods", "*");
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me");
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
@@ -33,13 +33,13 @@ public class SimpleCorsFilter implements Filter {
 
     @Override
     public void destroy() {
-        // TODO Auto-generated method stub
+        // Auto-generated method stub
 
     }
 
     @Override
-    public void init(FilterConfig arg0) throws ServletException {
-        // TODO Auto-generated method stub
+    public void init(FilterConfig arg0) {
+        // Auto-generated method stub
 
     }
 }

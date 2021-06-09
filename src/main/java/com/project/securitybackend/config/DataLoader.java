@@ -48,14 +48,14 @@ public class DataLoader implements ApplicationRunner {
     }
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(ApplicationArguments args) {
         KeyPair keyPair = signatureService.generateKeys();
         X509Certificate cert = this.createInitialRootCertificate(keyPair);
         keyStoresWriterService.write("goran.sladic@uns.ac.rs", keyPair.getPrivate(), "keystoreRoot.jks", "admin", cert);
 
-        Admin admin = _adminRepository.findOneById(UUID.fromString("a351022a-cc7a-4a17-a79b-8e0cf258db07"));
-        admin.setPassword(_passwordEncoder.encode(admin.getPassword()));
-        _adminRepository.save(admin);
+//        Admin admin = _adminRepository.findOneById(UUID.fromString("e47ca3f0-4906-495f-b508-4d9af7013575"));
+//        admin.setPassword(_passwordEncoder.encode(admin.getPassword()));
+//        _adminRepository.save(admin);
     }
 
     private X509Certificate createInitialRootCertificate(KeyPair keyPair){

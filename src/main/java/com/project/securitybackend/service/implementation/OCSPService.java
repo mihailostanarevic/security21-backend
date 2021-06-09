@@ -9,6 +9,7 @@ import com.project.securitybackend.service.definition.IAdminService;
 import com.project.securitybackend.service.definition.ICertificateService;
 import com.project.securitybackend.service.definition.IOCSPService;
 import com.project.securitybackend.util.enums.RevocationStatus;
+import com.project.securitybackend.util.exceptions.CertificateExceptions.NoRevokedCertificatesException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,11 +57,11 @@ public class OCSPService implements IOCSPService {
     }
 
     @Override
-    public List<OCSPResponse> getAll() throws Exception {
+    public List<OCSPResponse> getAll() {
         List<OCSPEntity> ocspEntities = _OCSPRepository.findAll();
 
         if(ocspEntities.isEmpty()){
-            throw new Exception("There are no revoked certificates;");
+            throw new NoRevokedCertificatesException();
         }
 
         return ocspEntities.stream()

@@ -15,6 +15,8 @@ import com.project.securitybackend.repository.ICertificateRequestRepository;
 import com.project.securitybackend.repository.ICertificatesExtensionsRepository;
 import com.project.securitybackend.repository.IIncrementerRepository;
 import com.project.securitybackend.service.definition.*;
+import com.project.securitybackend.util.exceptions.CertificateExceptions.CertificateEmailAlreadyExistException;
+import com.project.securitybackend.util.exceptions.CertificateExceptions.EmptyCertificateListException;
 import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x500.X500NameBuilder;
 import org.bouncycastle.asn1.x500.style.BCStyle;
@@ -44,7 +46,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-@SuppressWarnings({"SpellCheckingInspection", "FieldCanBeLocal", "RedundantThrows", "unused"})
+@SuppressWarnings({"SpellCheckingInspection", "FieldCanBeLocal", "unused"})
 @Service
 public class CertificateRequestService implements ICertificateRequestService {
 
@@ -71,10 +73,10 @@ public class CertificateRequestService implements ICertificateRequestService {
     }
 
     @Override
-    public CertificateRequestResponse createCertificateRequest(CertificateRequestRequest request) throws Exception {
+    public CertificateRequestResponse createCertificateRequest(CertificateRequestRequest request) {
         System.out.println(request);
         if(emailExist(request.getEmail())){
-            throw new Exception("This Email already exist. Please change field 'email'.");
+            throw new CertificateEmailAlreadyExistException(request.getEmail());
         }
         CertificateRequest certificateRequest = new CertificateRequest();
         certificateRequest.setCountry(request.getCountry());
@@ -118,17 +120,17 @@ public class CertificateRequestService implements ICertificateRequestService {
     }
 
     @Override
-    public CertificateRequestResponse getCertificateRequest(UUID id) throws Exception {
+    public CertificateRequestResponse getCertificateRequest(UUID id) {
         CertificateRequest certificateRequest = _certificateRequestRepository.findOneById(id);
         return mapCertificateRequestToCertificateRequestResponse(certificateRequest);
     }
 
     @Override
-    public List<CertificateRequestResponse> getAllCertificateRequests() throws Exception {
+    public List<CertificateRequestResponse> getAllCertificateRequests() {
         List<CertificateRequest> certificateRequests = _certificateRequestRepository.findAll();
 
         if(certificateRequests.isEmpty()){
-            throw new Exception("There are no certificate requests.");
+            throw new EmptyCertificateListException();
         }
 
         return certificateRequests.stream()
@@ -146,7 +148,7 @@ public class CertificateRequestService implements ICertificateRequestService {
     }
 
     @Override
-    public void denyCertificateRequest(UUID certificateId) throws Exception {
+    public void denyCertificateRequest(UUID certificateId) {
         _certificateRequestRepository.deleteById(certificateId);
     }
 

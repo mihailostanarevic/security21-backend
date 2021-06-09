@@ -11,13 +11,5 @@ import javax.persistence.Entity;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-public class Admin extends BaseEntity{
-
-    @Column(unique = true)
-    private String email;
-
-    @Column(nullable = false)
-    private String password;
+public class Admin extends User {
 }

@@ -11,5 +11,5 @@ public interface IAdminRepository extends JpaRepository<Admin, UUID> {
 
     Admin findOneById(UUID id);
 
-    Admin findOneByEmail(String email);
+    Admin findOneByUsername(String username);
 }
