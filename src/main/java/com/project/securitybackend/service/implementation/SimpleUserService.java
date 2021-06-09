@@ -2,11 +2,10 @@ package com.project.securitybackend.service.implementation;
 
 import com.project.securitybackend.dto.response.SimpleUserResponse;
 import com.project.securitybackend.entity.SimpleUser;
-import com.project.securitybackend.entity.User;
 import com.project.securitybackend.repository.ISimpleUserRepository;
+import com.project.securitybackend.service.definition.IEmailService;
 import com.project.securitybackend.service.definition.ISimpleUserService;
 import com.project.securitybackend.util.enums.UserStatus;
-import com.project.securitybackend.util.exceptions.UserExceptions.UserNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -19,9 +18,11 @@ import java.util.UUID;
 public class SimpleUserService implements ISimpleUserService {
 
     private final ISimpleUserRepository _simpleUserRepository;
+    private final IEmailService _emailService;
 
-    public SimpleUserService(ISimpleUserRepository simpleUserRepository) {
+    public SimpleUserService(ISimpleUserRepository simpleUserRepository, IEmailService emailService) {
         _simpleUserRepository = simpleUserRepository;
+        _emailService = emailService;
     }
 
     @Override
@@ -34,6 +35,7 @@ public class SimpleUserService implements ISimpleUserService {
     public void approveRegistrationRequest(UUID userId) {
         SimpleUser simpleUser = _simpleUserRepository.findById(userId);
         simpleUser.setUserStatus(UserStatus.APPROVED);
+        _emailService.confirmationMail(simpleUser);
         _simpleUserRepository.save(simpleUser);
     }
 
@@ -41,6 +43,13 @@ public class SimpleUserService implements ISimpleUserService {
     public void denyRegistrationRequest(UUID userId) {
         SimpleUser simpleUser = _simpleUserRepository.findById(userId);
         simpleUser.setUserStatus(UserStatus.DENIED);
+        _simpleUserRepository.save(simpleUser);
+    }
+
+    @Override
+    public void confirmAccount(UUID userId) {
+        SimpleUser simpleUser = _simpleUserRepository.findById(userId);
+        simpleUser.setUserConfirmAccount(true);
         _simpleUserRepository.save(simpleUser);
     }
 
@@ -68,6 +77,5 @@ public class SimpleUserService implements ISimpleUserService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return confirmationTime.format(formatter);
     }
-
 }
 

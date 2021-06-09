@@ -1,6 +1,5 @@
 package com.project.securitybackend.service.definition;
 
-import com.project.securitybackend.dto.response.CertificateRequestResponse;
 import com.project.securitybackend.dto.response.SimpleUserResponse;
 import com.project.securitybackend.util.enums.UserStatus;
 
@@ -14,4 +13,6 @@ public interface ISimpleUserService {
     void approveRegistrationRequest(UUID userId);
 
     void denyRegistrationRequest(UUID userId);
+
+    void confirmAccount(UUID userId);
 }

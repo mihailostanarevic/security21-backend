@@ -57,6 +57,7 @@ public class AuthService implements IAuthService {
         }
 
         checkSimpleUserStatus(user);
+        checkUserConfirmationStatus(user);
         Authentication authentication = loginSimpleUser(request.getUsername(), request.getPassword());
         return createLoginUserResponse(authentication, user);
     }
@@ -109,6 +110,13 @@ public class AuthService implements IAuthService {
             if( ((SimpleUser)user).getUserStatus().equals(UserStatus.DENIED) ) {
                 throw new UserRegistrationDeniedException();
             }
+        }
+    }
+
+    private void checkUserConfirmationStatus(User user) {
+        SimpleUser simpleUser = _simpleUserRepository.findById(user.getId());
+        if(simpleUser != null && !simpleUser.isUserConfirmAccount()) {
+            throw new UserAccountNotConfirmedException();
         }
     }
 
