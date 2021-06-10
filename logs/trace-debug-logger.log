@@ -1,14 +1,5 @@
-2021-06-09 21:58:37,147 | DEBUG | org.springframework.boot.StartupInfoLogger | [main] | Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
-2021-06-09 22:37:06,270 | DEBUG | org.springframework.boot.StartupInfoLogger | [main] | Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
-2021-06-09 22:37:57,223 | DEBUG | org.springframework.boot.StartupInfoLogger | [main] | Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
-2021-06-09 22:40:44,996 | DEBUG | org.springframework.boot.StartupInfoLogger | [main] | Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
-2021-06-09 22:54:38,577 | DEBUG | org.springframework.boot.StartupInfoLogger | [main] | Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
-2021-06-09 22:57:07,966 | DEBUG | org.springframework.boot.StartupInfoLogger | [main] | Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
-2021-06-09 23:15:39,834 | DEBUG | org.springframework.boot.StartupInfoLogger | [main] | Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
-2021-06-09 23:18:12,061 | DEBUG | org.springframework.boot.StartupInfoLogger | [main] | Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
-2021-06-09 23:20:57,476 | DEBUG | org.springframework.boot.StartupInfoLogger | [main] | Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
-2021-06-10 17:01:14,783 | DEBUG | org.springframework.boot.StartupInfoLogger | [main] | Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
-2021-06-10 17:25:02,265 | DEBUG | org.springframework.boot.StartupInfoLogger | [main] | Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
-2021-06-10 17:27:49,218 | DEBUG | org.springframework.boot.StartupInfoLogger | [main] | Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
-2021-06-10 17:33:34,635 | DEBUG | org.springframework.boot.StartupInfoLogger | [main] | Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
-2021-06-10 17:34:05,680 | DEBUG | org.springframework.boot.StartupInfoLogger | [main] | Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2021-06-10 19:49:35,447 | DEBUG | org.springframework.boot.web.servlet.server.DocumentRoot | [main] | None of the document roots [src/main/webapp, public, static] point to a directory and will be ignored.
+2021-06-10 19:50:06,429 | DEBUG | org.springframework.boot.StartupInfoLogger | [main] | Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2021-06-10 19:50:10,191 | DEBUG | org.springframework.boot.web.servlet.server.DocumentRoot | [main] | Code archive: C:\Users\Mihailo\.m2\repository\org\springframework\boot\spring-boot\2.2.6.RELEASE\spring-boot-2.2.6.RELEASE.jar
+2021-06-10 19:50:10,193 | DEBUG | org.springframework.boot.web.servlet.server.DocumentRoot | [main] | Code archive: C:\Users\Mihailo\.m2\repository\org\springframework\boot\spring-boot\2.2.6.RELEASE\spring-boot-2.2.6.RELEASE.jar
+2021-06-10 19:50:10,194 | DEBUG | org.springframework.boot.web.servlet.server.DocumentRoot | [main] | None of the document roots [src/main/webapp, public, static] point to a directory and will be ignored.
