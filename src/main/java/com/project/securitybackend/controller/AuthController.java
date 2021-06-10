@@ -32,7 +32,8 @@ public class AuthController {
 
     @PostMapping("/registration")
     public RegistrationResponse registration(@Valid @RequestBody RegistrationRequest request) {
-        return _loginService.registration(request);
+        return _authService.registration(request);
+    }
     
     @PutMapping("/password-recovery")
     public ResponseEntity<?> recoverPassword(@RequestBody RecoverPasswordRequest request){
