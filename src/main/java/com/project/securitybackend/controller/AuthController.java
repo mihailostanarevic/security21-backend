@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -29,9 +31,8 @@ public class AuthController {
     }
 
     @PostMapping("/registration")
-    public RegistrationResponse registration(@RequestBody RegistrationRequest request) {
-        return _authService.registration(request);
-    }
+    public RegistrationResponse registration(@Valid @RequestBody RegistrationRequest request) {
+        return _loginService.registration(request);
     
     @PutMapping("/password-recovery")
     public ResponseEntity<?> recoverPassword(@RequestBody RecoverPasswordRequest request){

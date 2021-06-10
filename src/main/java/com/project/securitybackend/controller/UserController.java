@@ -32,4 +32,9 @@ public class UserController {
     public void denyUser(@PathVariable("id") UUID userId) {
         _simpleUserService.denyRegistrationRequest(userId);
     }
+
+    @GetMapping("/{id}/confirm")
+    public void confirmAccount(@PathVariable("id") UUID userId) {
+        _simpleUserService.confirmAccount(userId);
+    }
 }

@@ -23,5 +23,5 @@ insert into user_authority (user_id, authority_id) values
 
 insert into admin (id) values ('e47ca3f0-4906-495f-b508-4d9af7013575');
 
-insert into simple_user (confirmation_time, user_status, id) values
-    ('2020-07-20T06:30:00', 'APPROVED', '5ef4fa34-da89-4b57-a361-b496f88a6e7e');
+insert into simple_user (confirmation_time, user_status, id, is_user_confirm_account) values
+    ('2020-07-20T06:30:00', 'APPROVED', '5ef4fa34-da89-4b57-a361-b496f88a6e7e', true);
