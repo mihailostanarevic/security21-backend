@@ -2,3 +2,14 @@
 2021-06-10 17:01:14,781 | INFO | org.springframework.boot.StartupInfoLogger | [main] | Starting SecurityBackendApplication on abeker with PID 14980 (D:\Fakultet\BSEP\security21-backend\target\classes started by a.beker in D:\Fakultet\BSEP\security21-backend)
 2021-06-10 17:01:14,783 | INFO | org.springframework.boot.SpringApplication | [main] | No active profile set, falling back to default profiles: default
 2021-06-10 17:01:18,833 | INFO | org.springframework.boot.StartupInfoLogger | [main] | Started SecurityBackendApplication in 4.434 seconds (JVM running for 6.446)
+2021-06-10 17:25:02,263 | INFO | org.springframework.boot.StartupInfoLogger | [main] | Starting SecurityBackendApplication on abeker with PID 7268 (D:\Fakultet\BSEP\security21-backend\target\classes started by a.beker in D:\Fakultet\BSEP\security21-backend)
+2021-06-10 17:25:02,265 | INFO | org.springframework.boot.SpringApplication | [main] | No active profile set, falling back to default profiles: default
+2021-06-10 17:25:06,149 | INFO | org.springframework.boot.StartupInfoLogger | [main] | Started SecurityBackendApplication in 4.287 seconds (JVM running for 5.305)
+2021-06-10 17:27:49,216 | INFO | org.springframework.boot.StartupInfoLogger | [main] | Starting SecurityBackendApplication on abeker with PID 14084 (D:\Fakultet\BSEP\security21-backend\target\classes started by a.beker in D:\Fakultet\BSEP\security21-backend)
+2021-06-10 17:27:49,218 | INFO | org.springframework.boot.SpringApplication | [main] | No active profile set, falling back to default profiles: default
+2021-06-10 17:27:53,192 | INFO | org.springframework.boot.StartupInfoLogger | [main] | Started SecurityBackendApplication in 4.425 seconds (JVM running for 5.434)
+2021-06-10 17:33:34,633 | INFO | org.springframework.boot.StartupInfoLogger | [main] | Starting SecurityBackendApplication on abeker with PID 3716 (D:\Fakultet\BSEP\security21-backend\target\classes started by a.beker in D:\Fakultet\BSEP\security21-backend)
+2021-06-10 17:33:34,636 | INFO | org.springframework.boot.SpringApplication | [main] | No active profile set, falling back to default profiles: default
+2021-06-10 17:34:05,677 | INFO | org.springframework.boot.StartupInfoLogger | [main] | Starting SecurityBackendApplication on abeker with PID 15928 (D:\Fakultet\BSEP\security21-backend\target\classes started by a.beker in D:\Fakultet\BSEP\security21-backend)
+2021-06-10 17:34:05,680 | INFO | org.springframework.boot.SpringApplication | [main] | No active profile set, falling back to default profiles: default
+2021-06-10 17:34:09,713 | INFO | org.springframework.boot.StartupInfoLogger | [main] | Started SecurityBackendApplication in 4.503 seconds (JVM running for 5.383)
