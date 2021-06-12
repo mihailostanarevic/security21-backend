@@ -1,1 +1,3 @@
-2021-06-10 19:50:18,437 | INFO | org.springframework.boot.StartupInfoLogger | [main] | Started SecurityBackendApplication in 12.664 seconds (JVM running for 14.822)
+2021-06-12 20:50:47,833 | INFO | org.springframework.boot.StartupInfoLogger | [main] | Starting SecurityBackendApplication on DESKTOP-4EQLSS3 with PID 13264 (C:\Users\Mihailo\Desktop\security21-backend\target\classes started by Mihailo in C:\Users\Mihailo\Desktop\security21-backend)
+2021-06-12 20:50:47,910 | INFO | org.springframework.boot.SpringApplication | [main] | No active profile set, falling back to default profiles: default
+2021-06-12 20:51:03,091 | INFO | org.springframework.boot.StartupInfoLogger | [main] | Started SecurityBackendApplication in 16.764 seconds (JVM running for 19.475)
