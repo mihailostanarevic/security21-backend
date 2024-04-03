@@ -1,3 +1,21 @@
 2021-06-12 20:50:47,833 | INFO | org.springframework.boot.StartupInfoLogger | [main] | Starting SecurityBackendApplication on DESKTOP-4EQLSS3 with PID 13264 (C:\Users\Mihailo\Desktop\security21-backend\target\classes started by Mihailo in C:\Users\Mihailo\Desktop\security21-backend)
 2021-06-12 20:50:47,910 | INFO | org.springframework.boot.SpringApplication | [main] | No active profile set, falling back to default profiles: default
 2021-06-12 20:51:03,091 | INFO | org.springframework.boot.StartupInfoLogger | [main] | Started SecurityBackendApplication in 16.764 seconds (JVM running for 19.475)
+2024-04-02 22:28:23,117 | INFO | org.springframework.boot.StartupInfoLogger | [main] | Starting SecurityBackendApplication on Mihailos-MacBook-Pro.local with PID 88178 (/Users/mihailos/Desktop/security21-backend/target/classes started by mihailos in /Users/mihailos/Desktop/security21-backend)
+2024-04-02 22:28:23,119 | INFO | org.springframework.boot.SpringApplication | [main] | No active profile set, falling back to default profiles: default
+2024-04-02 22:28:27,447 | INFO | org.springframework.boot.StartupInfoLogger | [main] | Started SecurityBackendApplication in 4.768 seconds (JVM running for 5.465)
+2024-04-02 22:38:12,701 | INFO | org.springframework.boot.StartupInfoLogger | [main] | Starting SecurityBackendApplication on Mihailos-MacBook-Pro.local with PID 89600 (/Users/mihailos/Desktop/security21-backend/target/classes started by mihailos in /Users/mihailos/Desktop/security21-backend)
+2024-04-02 22:38:12,705 | INFO | org.springframework.boot.SpringApplication | [main] | No active profile set, falling back to default profiles: default
+2024-04-02 22:38:17,838 | INFO | org.springframework.boot.StartupInfoLogger | [main] | Started SecurityBackendApplication in 5.568 seconds (JVM running for 7.022)
+2024-04-02 22:44:05,220 | INFO | org.springframework.boot.StartupInfoLogger | [main] | Starting SecurityBackendApplication on Mihailos-MacBook-Pro.local with PID 90319 (/Users/mihailos/Desktop/security21-backend/target/classes started by mihailos in /Users/mihailos/Desktop/security21-backend)
+2024-04-02 22:44:05,223 | INFO | org.springframework.boot.SpringApplication | [main] | No active profile set, falling back to default profiles: default
+2024-04-02 22:44:10,415 | INFO | org.springframework.boot.StartupInfoLogger | [main] | Started SecurityBackendApplication in 5.672 seconds (JVM running for 6.459)
+2024-04-02 22:58:11,635 | INFO | org.springframework.boot.StartupInfoLogger | [main] | Starting SecurityBackendApplication on Mihailos-MacBook-Pro.local with PID 91105 (/Users/mihailos/Desktop/security21-backend/target/classes started by mihailos in /Users/mihailos/Desktop/security21-backend)
+2024-04-02 22:58:11,637 | INFO | org.springframework.boot.SpringApplication | [main] | No active profile set, falling back to default profiles: default
+2024-04-02 22:58:16,059 | INFO | org.springframework.boot.StartupInfoLogger | [main] | Started SecurityBackendApplication in 4.829 seconds (JVM running for 5.514)
+2024-04-02 23:11:02,240 | INFO | org.springframework.boot.StartupInfoLogger | [main] | Starting SecurityBackendApplication on Mihailos-MacBook-Pro.local with PID 91680 (/Users/mihailos/Desktop/security21-backend/target/classes started by mihailos in /Users/mihailos/Desktop/security21-backend)
+2024-04-02 23:11:02,242 | INFO | org.springframework.boot.SpringApplication | [main] | No active profile set, falling back to default profiles: default
+2024-04-02 23:11:07,014 | INFO | org.springframework.boot.StartupInfoLogger | [main] | Started SecurityBackendApplication in 5.155 seconds (JVM running for 5.797)
+2024-04-02 23:17:39,741 | INFO | org.springframework.boot.StartupInfoLogger | [main] | Starting SecurityBackendApplication on Mihailos-MacBook-Pro.local with PID 92045 (/Users/mihailos/Desktop/security21-backend/target/classes started by mihailos in /Users/mihailos/Desktop/security21-backend)
+2024-04-02 23:17:39,744 | INFO | org.springframework.boot.SpringApplication | [main] | No active profile set, falling back to default profiles: default
+2024-04-02 23:17:44,464 | INFO | org.springframework.boot.StartupInfoLogger | [main] | Started SecurityBackendApplication in 5.139 seconds (JVM running for 5.795)
